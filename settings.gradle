@@ -8,3 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Motorola"
 include ':app'
+include ':BusinessLogicModule'
+include ':PresentationModule'
+include ':DataSourceModule'
+include ':app:persistencemodule'
+include ':PersistenceModule'
