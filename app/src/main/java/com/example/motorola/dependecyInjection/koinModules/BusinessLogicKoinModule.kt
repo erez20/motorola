@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 
 val businessLoginModule = module {
-    single { UserRepository(get()) }
+    single { UserRepository(get(),get()) }
 }

@@ -1,8 +1,8 @@
 package com.example.motorola.businessLogic.entities
 
 data class UserBusinessLogicEntity(
-    private val firstName: String,
-    private val lastName: String,
-    private val email: String,
-    private val pictureLink: String
+    val firstName: String,
+    val lastName: String,
+    val email: String,
+    val pictureLink: String
 )
