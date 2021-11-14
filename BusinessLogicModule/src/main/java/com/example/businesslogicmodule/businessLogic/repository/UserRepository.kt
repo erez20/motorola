@@ -1,10 +1,15 @@
 package com.example.businesslogicmodule.businessLogic.repository
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.businesslogicmodule.businessLogic.boundaries.DataSourceBoundary
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
+import com.example.motorola.businessLogic.entities.UserBusinessLogicEntity
 
 class UserRepository(val dataSourceBoundary: DataSourceBoundary, val persistenceBoundary: PersistenceBoundary) {
+
+    val users: LiveData<List<UserBusinessLogicEntity>> = persistenceBoundary.allUsers
 
     @Throws(Exception::class)
     suspend fun initNextUsers(amount: Int) {

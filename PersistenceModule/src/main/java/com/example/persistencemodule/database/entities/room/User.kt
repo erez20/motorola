@@ -9,9 +9,9 @@ import com.example.motorola.businessLogic.entities.UserBusinessLogicEntity
 data class User constructor(
     @PrimaryKey
     @ColumnInfo(name = "email") val email: String,
-    @ColumnInfo(name = "first_name")val firstName: String,
-    @ColumnInfo(name = "last_name")val lastName: String,
-    @ColumnInfo(name = "picture")val pictureLink: String
+    @ColumnInfo(name = "first_name") val firstName: String,
+    @ColumnInfo(name = "last_name") val lastName: String,
+    @ColumnInfo(name = "picture") val pictureLink: String
 )
 
 fun User.asBusinessLogicEntity() : UserBusinessLogicEntity {
