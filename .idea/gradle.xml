@@ -14,8 +14,8 @@
             <option value="$PROJECT_DIR$/DataSourceModule" />
             <option value="$PROJECT_DIR$/PersistenceModule" />
             <option value="$PROJECT_DIR$/PresentationModule" />
+            <option value="$PROJECT_DIR$/UtilsModule" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/app/persistencemodule" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,7 +1,7 @@
 package com.example.datasourcemodule.dataSource
 
 
-import com.example.datasourcemodule.dataSource.DataSourceClients.RandomUser.RandomUserEntities.RandomUserResult
+import com.example.datasourcemodule.dataSource.dataSourceClients.randomUser.randomUserEntities.RandomUserResult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
