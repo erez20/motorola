@@ -2,6 +2,8 @@ package com.example.utilsmodule.utils
 
 import java.time.Instant
 
+import java.util.concurrent.TimeUnit
+
 
 object UsersDateUtils {
 
@@ -13,10 +15,10 @@ object UsersDateUtils {
         return System.currentTimeMillis() - dateTZToEpochInMilliSec(dateTZ)
     }
 
-//    private fun nextBirthdayToEpochInMilliSec(dateTZ: String): Long {
-//        val timeOfBirthInMillis =  Instant.parse(dateTZ).toEpochMilli()
-//        val nextYearTodayInMillis = System.currentTimeMillis() + 52 * DateUtils.WEEK_IN_MILLIS
-//        val millisToBirthday =
-//    }
-
+    fun countDownForNextBD(ageInMillis: Long): Int {
+        val millisPerYear = TimeUnit.DAYS.toMillis(365)
+        val nextBDInMillis = ageInMillis.mod(millisPerYear)
+        val nextBDInDays = 365 - nextBDInMillis.div(TimeUnit.DAYS.toMillis(1)).toInt()
+        return nextBDInDays
+    }
 }

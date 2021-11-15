@@ -1,6 +1,5 @@
 package com.example.presentationmodule.presentation.entities
 
-import android.util.Log
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
 import com.example.utilsmodule.utils.UsersDateUtils
 

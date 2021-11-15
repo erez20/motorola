@@ -5,13 +5,22 @@ import com.example.businesslogicmodule.businessLogic.boundaries.DataSourceBounda
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
 
-class UserRepository(val dataSourceBoundary: DataSourceBoundary, val persistenceBoundary: PersistenceBoundary) {
+class UserRepository(private val dataSourceBoundary: DataSourceBoundary, private val persistenceBoundary: PersistenceBoundary) {
 
     val users: LiveData<List<UserBusinessLogicEntity>> = persistenceBoundary.allUsers
 
     @Throws(Exception::class)
-    suspend fun initNextUsers(amount: Int) {
-        val x = dataSourceBoundary.getNextUsers(10)
-        persistenceBoundary.storeUserList(x)
+    suspend fun initWithNewUsers(amount: Int) {
+        persistenceBoundary.deleteAllUsers()
+        val nextUsers = dataSourceBoundary.getNextUsers(amount)
+        persistenceBoundary.storeUserList(nextUsers)
     }
+
+//    @Throws(Exception::class)
+//    suspend fun fetchUsers(amount: Int) {
+//        persistenceBoundary.deleteAllUsers()
+//        val nextUsers = dataSourceBoundary.getNextUsers(amount)
+//        persistenceBoundary.storeUserList(nextUsers)
+//    }
+
 }

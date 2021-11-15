@@ -4,7 +4,6 @@ package com.example.motorola.dependecyInjection.koinModules
 import android.app.Application
 import androidx.room.Room
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
-import com.example.businesslogicmodule.businessLogic.repository.UserRepository
 import com.example.persistencemodule.PersistenceBoundaryImpl
 import com.example.persistencemodule.database.entities.room.UserDB
 import com.example.persistencemodule.database.entities.room.UserDao

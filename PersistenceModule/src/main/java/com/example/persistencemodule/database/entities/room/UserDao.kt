@@ -16,4 +16,8 @@ interface UserDao {
 
     @Query("DELETE FROM user")
     fun deleteAll()
+
+    @Query("SELECT COUNT(*) FROM user")
+    fun rowCount() : Int
+
 }

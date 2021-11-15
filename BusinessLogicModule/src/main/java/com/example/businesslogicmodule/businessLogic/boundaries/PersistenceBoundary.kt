@@ -6,4 +6,5 @@ import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicE
 abstract class PersistenceBoundary {
     abstract val allUsers : LiveData<List<UserBusinessLogicEntity>>
     abstract suspend fun storeUserList(users: List<UserBusinessLogicEntity>)
+    abstract suspend fun deleteAllUsers()
 }

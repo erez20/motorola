@@ -7,8 +7,9 @@ import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicE
 import com.example.persistencemodule.database.entities.room.UserDao
 import com.example.persistencemodule.database.entities.room.asBusinessLogicEntities
 import com.example.persistencemodule.database.entities.room.asDatabaseEntities
+import java.lang.Exception
 
-class PersistenceBoundaryImpl(val userDao: UserDao) : PersistenceBoundary() {
+class PersistenceBoundaryImpl(private val userDao: UserDao) : PersistenceBoundary() {
 
     override val allUsers: LiveData<List<UserBusinessLogicEntity>>
         get() = Transformations.map(userDao.getUsers()) { databaseUserList ->
@@ -16,7 +17,12 @@ class PersistenceBoundaryImpl(val userDao: UserDao) : PersistenceBoundary() {
         }
 
     override suspend fun storeUserList(users: List<UserBusinessLogicEntity>) {
+
         userDao.insertAll(*users.asDatabaseEntities())
+    }
+
+    override suspend fun deleteAllUsers() {
+        return userDao.deleteAll()
     }
 
 }

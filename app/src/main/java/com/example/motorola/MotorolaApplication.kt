@@ -1,10 +1,7 @@
 package com.example.motorola
 
 import android.app.Application
-import com.example.motorola.dependecyInjection.koinModules.businessLoginModule
-import com.example.motorola.dependecyInjection.koinModules.dataSourceModule
-import com.example.motorola.dependecyInjection.koinModules.persistenceModule
-import com.example.motorola.dependecyInjection.koinModules.presentationModule
+import com.example.motorola.dependecyInjection.koinModules.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -14,7 +11,13 @@ class MotorolaApplication : Application() {
         // Start Koin
         startKoin {
             androidContext(this@MotorolaApplication)
-            modules(businessLoginModule, presentationModule, dataSourceModule, persistenceModule)
+            modules(
+                businessLoginModule,
+                presentationModule,
+                dataSourceModule,
+                persistenceModule,
+                utilsModule
+            )
         }
     }
 }
