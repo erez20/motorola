@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         observeViewModel()
-
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             object : Observer<List<UserPresentationEntity>> {
                 override fun onChanged(t: List<UserPresentationEntity>?) {
                     if (t.isNullOrEmpty()) {
-                        usersSharedViewModel.fetchNewUsers()
+                        usersSharedViewModel.initNewUsers()
                     }
                     usersSharedViewModel.presentationUsers.removeObserver(this)
                 }

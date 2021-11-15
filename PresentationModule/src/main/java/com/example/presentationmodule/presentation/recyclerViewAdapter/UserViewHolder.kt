@@ -10,19 +10,27 @@ class UserViewHolder(
     onItemClicked: (UserPresentationEntity) -> Unit,
     onItemLongClicked: (UserPresentationEntity) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
-    private var currItem: UserPresentationEntity? = null
 
+    private var currItem: UserPresentationEntity? = null
     init {
-        binding.root.setOnClickListener {
-            currItem?.let {
-                onItemClicked(it)
-            }
-        }
-        binding.root.setOnLongClickListener{
+        itemClickListener(onItemClicked)
+        itemLongClickListener(onItemLongClicked)
+    }
+
+    private fun itemLongClickListener(onItemLongClicked: (UserPresentationEntity) -> Unit) {
+        binding.root.setOnLongClickListener {
             currItem?.let {
                 onItemLongClicked(it)
             }
             return@setOnLongClickListener true
+        }
+    }
+
+    private fun itemClickListener(onItemClicked: (UserPresentationEntity) -> Unit) {
+        binding.root.setOnClickListener {
+            currItem?.let {
+                onItemClicked(it)
+            }
         }
     }
 

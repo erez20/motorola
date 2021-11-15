@@ -1,4 +1,4 @@
-package com.example.persistencemodule.database.entities.room
+package com.example.persistencemodule.database.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -16,8 +16,5 @@ interface UserDao {
 
     @Query("DELETE FROM user")
     fun deleteAll()
-
-    @Query("SELECT COUNT(*) FROM user")
-    fun rowCount() : Int
 
 }

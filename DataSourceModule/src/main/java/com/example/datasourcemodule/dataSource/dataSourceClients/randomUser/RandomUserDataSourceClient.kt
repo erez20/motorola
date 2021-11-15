@@ -8,8 +8,8 @@ import com.example.datasourcemodule.dataSource.dataSourceClients.randomUser.rand
 class RandomUserDataSourceClient : DataSourceClient {
 
     override suspend fun getNextUsers(amount: Int): List<UserDataSourceEntity> {
-        val userRandomMeEntities =  RandomUserApi.retrofitService.getUsers(amount)
-        return userRandomMeEntities.results.asUserDataSourceEntities()
+        val randomUserResult =  RandomUserApi.retrofitService.getUsers(amount)
+        return randomUserResult.results.asUserDataSourceEntities()
     }
 
 }

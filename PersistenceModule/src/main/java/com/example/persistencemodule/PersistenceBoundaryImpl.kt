@@ -4,10 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
-import com.example.persistencemodule.database.entities.room.UserDao
-import com.example.persistencemodule.database.entities.room.asBusinessLogicEntities
-import com.example.persistencemodule.database.entities.room.asDatabaseEntities
-import java.lang.Exception
+import com.example.persistencemodule.database.room.UserDao
+import com.example.persistencemodule.database.room.asBusinessLogicEntities
+import com.example.persistencemodule.database.room.asDatabaseEntities
 
 class PersistenceBoundaryImpl(private val userDao: UserDao) : PersistenceBoundary() {
 

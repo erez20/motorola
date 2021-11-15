@@ -6,5 +6,5 @@ import org.koin.dsl.module
 
 val utilsModule = module {
     single<UsersDateUtils> { UsersDateUtils }
-    single<ShareUtils> { ShareUtils() }
+    single<ShareUtils> { ShareUtils }
 }

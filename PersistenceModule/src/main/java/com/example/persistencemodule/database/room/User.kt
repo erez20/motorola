@@ -1,4 +1,4 @@
-package com.example.persistencemodule.database.entities.room
+package com.example.persistencemodule.database.room
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

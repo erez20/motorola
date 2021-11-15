@@ -7,14 +7,14 @@ import com.example.presentationmodule.presentation.entities.UserPresentationEnti
 import com.example.presentationmodule.presentation.entities.asPresentationEntity
 import com.example.utilsmodule.utils.UsersDateUtils
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
 class UsersSharedViewModel(
     private val userRepository: UserRepository,
-    private val usersDateUtils: UsersDateUtils
+    private val usersDateUtils: UsersDateUtils,
+    private val amountOfUsers: Int
 ) : ViewModel() {
 
     val presentationUsers =
@@ -41,51 +41,51 @@ class UsersSharedViewModel(
         get() = _eventNavigateToDetailed
 
 
-    fun itemSelected(userPresentationEntity: UserPresentationEntity) {
-        _displayOneItem.value = userPresentationEntity
-        onEventNavigateToDetailed()
-    }
-
     fun refreshClicked() {
-        displayNewUsers()
+        refreshWithNewUsers()
     }
 
-    private fun displayNewUsers() {
+    fun initNewUsers() {
+        refreshWithNewUsers()
+    }
+
+    private fun refreshWithNewUsers() {
         startProgressBar()
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO) {
-                    delay(5000L)
-                    userRepository.initWithNewUsers(10).toString()
-
+                    userRepository.initWithNewUsers(amountOfUsers).toString()
                 }
-
             } catch (e: Exception) {
                 updateErrorStatus("Error: ${e.message}")
             } finally {
                 stopProgressBar()
             }
         }
+    }
 
+    fun itemSelected(userPresentationEntity: UserPresentationEntity) {
+        _displayOneItem.value = userPresentationEntity
+        onEventNavigateToDetailed()
     }
 
     private fun updateErrorStatus(message: String) {
         _errorStatus.value = message
     }
 
-    public fun unsetErrorStatus() {
+
+    fun unsetErrorStatus() {
         _errorStatus.value = ""
     }
-
 
     private fun onEventNavigateToDetailed() {
         _eventNavigateToDetailed.value = true
     }
 
+
     fun onEventNavigateToDetailedCompleted() {
         _eventNavigateToDetailed.value = false
     }
-
 
     private fun stopProgressBar() {
         _displayProgressBar.postValue(false)
@@ -93,10 +93,6 @@ class UsersSharedViewModel(
 
     private fun startProgressBar() {
         _displayProgressBar.value = true
-    }
-
-    fun fetchNewUsers() {
-        displayNewUsers()
     }
 
 }

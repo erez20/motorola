@@ -16,11 +16,4 @@ class UserRepository(private val dataSourceBoundary: DataSourceBoundary, private
         persistenceBoundary.storeUserList(nextUsers)
     }
 
-//    @Throws(Exception::class)
-//    suspend fun fetchUsers(amount: Int) {
-//        persistenceBoundary.deleteAllUsers()
-//        val nextUsers = dataSourceBoundary.getNextUsers(amount)
-//        persistenceBoundary.storeUserList(nextUsers)
-//    }
-
 }

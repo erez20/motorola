@@ -5,8 +5,8 @@ import android.app.Application
 import androidx.room.Room
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
 import com.example.persistencemodule.PersistenceBoundaryImpl
-import com.example.persistencemodule.database.entities.room.UserDB
-import com.example.persistencemodule.database.entities.room.UserDao
+import com.example.persistencemodule.database.room.UserDB
+import com.example.persistencemodule.database.room.UserDao
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 

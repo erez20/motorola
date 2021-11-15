@@ -3,7 +3,7 @@ package com.example.utilsmodule.utils
 import android.content.Context
 import android.content.Intent
 
-class ShareUtils {
+object ShareUtils {
     fun shareByEmailToAddress(context: Context, address: String) {
         val emailIntent = Intent(Intent.ACTION_SEND)
         emailIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(address))
