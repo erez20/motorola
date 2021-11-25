@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.example.presentationmodule.databinding.ActivityMainBinding
 import com.example.presentationmodule.presentation.sharedViewModel.UsersSharedViewModel
 import com.example.presentationmodule.presentation.entities.UserPresentationEntity
+import com.example.presentationmodule.presentation.sharedViewModel.ErrorStatus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -39,8 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeErrorStatus() {
         usersSharedViewModel.errorStatus.observe(this) {
-            if (it != "") {
-                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            if (it is ErrorStatus.ErrorExists) {
+                Toast.makeText(this, it.errorMessage, Toast.LENGTH_SHORT).show()
                 usersSharedViewModel.unsetErrorStatus()
             }
         }

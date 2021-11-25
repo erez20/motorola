@@ -3,6 +3,9 @@ package com.example.presentationmodule.presentation.sharedViewModel
 import androidx.lifecycle.*
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
 import com.example.businesslogicmodule.businessLogic.repository.UserRepository
+import com.example.businesslogicmodule.businessLogic.useCases.InitUserUseCase
+import com.example.businesslogicmodule.businessLogic.useCases.RefreshUserUseCase
+import com.example.businesslogicmodule.businessLogic.useCases.UseCase
 import com.example.presentationmodule.presentation.entities.UserPresentationEntity
 import com.example.presentationmodule.presentation.entities.asPresentationEntity
 import com.example.utilsmodule.utils.UsersDateUtils
@@ -14,8 +17,10 @@ import kotlinx.coroutines.withContext
 class UsersSharedViewModel(
     private val userRepository: UserRepository,
     private val usersDateUtils: UsersDateUtils,
-    private val amountOfUsers: Int
-) : ViewModel() {
+    private val initUserUseCase: UseCase,
+    private val refreshUserUseCase: RefreshUserUseCase
+    ) : ViewModel() {
+
 
     val presentationUsers =
         Transformations.map(userRepository.users) { userBusinessLogicEntityList: List<UserBusinessLogicEntity> ->
@@ -32,8 +37,8 @@ class UsersSharedViewModel(
     val displayProgressBar: LiveData<Boolean>
         get() = _displayProgressBar
 
-    private val _errorStatus = MutableLiveData("")
-    val errorStatus: LiveData<String>
+    private val _errorStatus : MutableLiveData<ErrorStatus> = MutableLiveData(ErrorStatus.NoErrorExits)
+    val errorStatus: MutableLiveData<ErrorStatus>
         get() = _errorStatus
 
     private val _eventNavigateToDetailed = MutableLiveData(false)
@@ -41,20 +46,28 @@ class UsersSharedViewModel(
         get() = _eventNavigateToDetailed
 
 
-    fun refreshClicked() {
-        refreshWithNewUsers()
-    }
 
     fun initNewUsers() {
-        refreshWithNewUsers()
-    }
-
-    private fun refreshWithNewUsers() {
-        startProgressBar()
         viewModelScope.launch {
             try {
+                startProgressBar()
                 withContext(Dispatchers.IO) {
-                    userRepository.initWithNewUsers(amountOfUsers).toString()
+                    initUserUseCase.execute()
+                }
+            } catch (e: Exception) {
+                updateErrorStatus("Error: ${e.message}")
+            } finally {
+                stopProgressBar()
+            }
+        }
+    }
+
+    fun refreshClicked() {
+        viewModelScope.launch {
+            try {
+                startProgressBar()
+                withContext(Dispatchers.IO) {
+                    refreshUserUseCase.execute()
                 }
             } catch (e: Exception) {
                 updateErrorStatus("Error: ${e.message}")
@@ -70,12 +83,12 @@ class UsersSharedViewModel(
     }
 
     private fun updateErrorStatus(message: String) {
-        _errorStatus.value = message
+        _errorStatus.value = ErrorStatus.ErrorExists(message)
     }
 
 
     fun unsetErrorStatus() {
-        _errorStatus.value = ""
+        _errorStatus.value = ErrorStatus.NoErrorExits
     }
 
     private fun onEventNavigateToDetailed() {
@@ -96,3 +109,4 @@ class UsersSharedViewModel(
     }
 
 }
+

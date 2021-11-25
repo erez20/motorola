@@ -8,11 +8,6 @@ data class UserPresentationEntity(
     val email: String,
     val picture : String,
     val ageInMillis: Long
-//    ,
-//    val ageByYear: Int
-////    ,
-//    val ageNumeric: Float,
-//    val daysUntilBirthDay:Int
 )
 
 fun UserBusinessLogicEntity.asPresentationEntity(userDateUtils: UsersDateUtils): UserPresentationEntity {
