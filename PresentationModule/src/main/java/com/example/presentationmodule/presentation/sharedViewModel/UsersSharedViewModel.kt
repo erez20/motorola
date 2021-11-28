@@ -3,9 +3,8 @@ package com.example.presentationmodule.presentation.sharedViewModel
 import androidx.lifecycle.*
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
 import com.example.businesslogicmodule.businessLogic.repository.UserRepository
-import com.example.businesslogicmodule.businessLogic.useCases.InitUserUseCase
-import com.example.businesslogicmodule.businessLogic.useCases.RefreshUserUseCase
-import com.example.businesslogicmodule.businessLogic.useCases.UseCase
+import com.example.businesslogicmodule.businessLogic.useCases.initUser.InitUserUseCaseBoundary
+import com.example.businesslogicmodule.businessLogic.useCases.refreshUser.RefreshUserUseCaseBoundary
 import com.example.presentationmodule.presentation.entities.UserPresentationEntity
 import com.example.presentationmodule.presentation.entities.asPresentationEntity
 import com.example.utilsmodule.utils.UsersDateUtils
@@ -17,8 +16,8 @@ import kotlinx.coroutines.withContext
 class UsersSharedViewModel(
     private val userRepository: UserRepository,
     private val usersDateUtils: UsersDateUtils,
-    private val initUserUseCase: UseCase,
-    private val refreshUserUseCase: RefreshUserUseCase
+    private val initUserUseCase: InitUserUseCaseBoundary,
+    private val refreshUserUseCase: RefreshUserUseCaseBoundary
     ) : ViewModel() {
 
 
@@ -52,7 +51,7 @@ class UsersSharedViewModel(
             try {
                 startProgressBar()
                 withContext(Dispatchers.IO) {
-                    initUserUseCase.execute()
+                    initUserUseCase.execute(3)
                 }
             } catch (e: Exception) {
                 updateErrorStatus("Error: ${e.message}")
@@ -67,7 +66,7 @@ class UsersSharedViewModel(
             try {
                 startProgressBar()
                 withContext(Dispatchers.IO) {
-                    refreshUserUseCase.execute()
+                    refreshUserUseCase.execute(10)
                 }
             } catch (e: Exception) {
                 updateErrorStatus("Error: ${e.message}")

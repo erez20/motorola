@@ -1,21 +1,16 @@
-package com.example.businesslogicmodule.businessLogic.useCases
+package com.example.businesslogicmodule.businessLogic.useCases.initUser
 
 import com.example.businesslogicmodule.businessLogic.boundaries.DataSourceBoundary
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
 
-class RefreshUserUseCase(
+class InitUserUseCase(
     private val dataSourceBoundary: DataSourceBoundary,
-    private val persistenceBoundary: PersistenceBoundary,
-    private val amount: Int //TODO
-) : UseCase(){
+    private val persistenceBoundary: PersistenceBoundary
+) : InitUserUseCaseBoundary(){
 
     @Throws(Exception::class)
-    override suspend fun execute() {
-        persistenceBoundary.deleteAllUsers()
+    override suspend fun execute(amount: Int) {
         val nextUsers = dataSourceBoundary.getNextUsers(amount)
         persistenceBoundary.storeUserList(nextUsers)
     }
-
-
-
 }
