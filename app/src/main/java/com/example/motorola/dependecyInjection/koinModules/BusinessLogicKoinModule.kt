@@ -10,5 +10,5 @@ import org.koin.dsl.module
 val businessLoginModule = module {
     factory  { InitUserUseCase(get(),get()) }
     factory  { RefreshUserUseCase(get(),get()) }
-    single { UserRepository(get(),get()) }
+    single { UserRepository(get()) }
 }

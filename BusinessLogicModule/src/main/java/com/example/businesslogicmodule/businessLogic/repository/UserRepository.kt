@@ -5,7 +5,7 @@ import com.example.businesslogicmodule.businessLogic.boundaries.DataSourceBounda
 import com.example.businesslogicmodule.businessLogic.boundaries.PersistenceBoundary
 import com.example.businesslogicmodule.businessLogic.entities.UserBusinessLogicEntity
 
-class UserRepository(private val dataSourceBoundary: DataSourceBoundary, private val persistenceBoundary: PersistenceBoundary) {
+class UserRepository(private val persistenceBoundary: PersistenceBoundary) {
 
     val users: LiveData<List<UserBusinessLogicEntity>> = persistenceBoundary.allUsers
 
